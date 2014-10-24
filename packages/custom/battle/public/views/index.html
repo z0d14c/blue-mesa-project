@@ -1,0 +1,65 @@
+<section class="" data-ng-controller="BattleController">
+    <h1>BATTLE!</h1>
+    <div style="margin: 0 auto">
+    <p>Enter names in the fields, then click "Submit" to submit the form:</p>
+
+    <form id="frm1" action="form_action.asp">
+        First name: <input type="text" name="fname"><br>
+        Last name: <input type="text" name="lname"><br><br>
+        <input type="button" onclick="myFunction()" value="Submit">
+    </form>
+
+    <button onclick="myEasy()">
+        Easy
+
+    </button>
+
+    <button onclick="myMed()">
+        Medium
+
+    </button>
+
+    <button onclick="myHard()">
+        Hard
+    </button>
+
+    <button onclick="ask()">
+        Ask Question
+    </button>
+
+
+    <script>
+
+
+        function myFunction() {
+            document.getElementById("frm1").submit();
+        }
+
+
+        function myEasy() {
+            var x = document.getElementById("btn1").name;
+            document.getElementById("demo").innerHTML = x;
+        }
+        function ask() {
+            var a = Math.floor(Math.random() * 10) + 1; //randomly generates a random variable a between 1 and 11
+            var b = Math.floor(Math.random() * 10) + 1; //randomly generates a random variable b between 1 and 11
+            var op = ["*", "+", "/", "-"][Math.floor(Math.random()*4)]; //randomly selects an operation
+            var check = eval(a + op + b);
+            return prompt("How much is " + a + " " + op + " " + b + "?")== check;
+        }
+
+        var questions = [ask()],
+                total = questions.length,
+                correct = questions.filter(Boolean).length;
+        if (correct = 1){
+            alert( "You got "+correct+"/"+total+" attacks succesful");
+        }
+        else{
+            alert( "Attack Fail");
+        }
+
+    </script>
+        </div>
+
+</section>
+
