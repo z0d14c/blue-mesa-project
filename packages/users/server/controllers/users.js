@@ -47,6 +47,8 @@ exports.session = function(req, res) {
  * Create user
  */
 exports.create = function(req, res, next) {
+    console.log('************BEGINNING CONSOLE LOG***************');
+    console.log(req.body);
   var user = new User(req.body);
 
   user.provider = 'local';

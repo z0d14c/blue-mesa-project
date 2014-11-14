@@ -22,6 +22,7 @@ angular.module('mean.users')
         });
     }
   ])
+
   .controller('LoginCtrl', ['$scope', '$rootScope', '$http', '$location', 'Global',
     function($scope, $rootScope, $http, $location, Global) {
       // This object will be filled by the form
@@ -106,7 +107,8 @@ angular.module('mean.users')
           password: $scope.user.password,
           confirmPassword: $scope.user.confirmPassword,
           username: $scope.user.username,
-          name: $scope.user.name
+          name: $scope.user.name,
+          testString: $scope.user.testString
         })
           .success(function() {
             // authentication OK
@@ -169,8 +171,8 @@ angular.module('mean.users')
             }
           })
           .error(function(error) {
-            if (error.msg === 'Token invalid or expired')
-              $scope.resetpassworderror = 'Could not update password as token is invalid or may have expired';
+            if (error.msg === 'Token invalid or etestStringired')
+              $scope.resetpassworderror = 'Could not update password as token is invalid or may have etestStringired';
             else
               $scope.validationError = error;
           });
