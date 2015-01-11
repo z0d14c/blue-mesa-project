@@ -1,0 +1,11 @@
+<div ng-controller="CreateController">
+    <form id="createCharacterForm">
+        It's time to create a Blue Mesa warrior!
+        Please choose a class.
+        <div class="form-group">
+            <input type="radio" ng-model="chosenClass" name="class" value="warrior">Warrior
+            <input type="radio" ng-model="chosenClass" name="class" value="mage">Mage
+        </div>
+        <button ng-click="submit()">Submit</button>
+    </form>
+</div>

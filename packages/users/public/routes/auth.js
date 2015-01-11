@@ -57,6 +57,7 @@ angular.module('mean.users').config(['$stateProvider',
         resolve: {
           loggedin: checkLoggedOut
         }
-      });
+      })
+
   }
 ]);

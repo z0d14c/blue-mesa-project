@@ -25,8 +25,10 @@ Battle.register(function(app, auth, database) {
   });
   
   Battle.aggregateAsset('css', 'battle.css');
+    Battle.aggregateAsset('css', 'battle.css');
 
-  /**
+
+    /**
     //Uncomment to use. Requires meanio@0.3.7 or above
     // Save settings with callback
     // Use this for saving data from administration pages

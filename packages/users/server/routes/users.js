@@ -15,6 +15,10 @@ module.exports = function(MeanUser, app, auth, database, passport) {
   app.route('/register')
     .post(users.create);
 
+  //pick user class
+    app.route('/users/chooseclass')
+    .post(users.chooseClass);
+
   app.route('/forgot-password')
     .post(users.forgotpassword);
 
@@ -108,4 +112,6 @@ module.exports = function(MeanUser, app, auth, database, passport) {
       failureRedirect: '#!/login'
     }), users.authCallback);
 
+  app.route('/users/get')
+      .get(users.returnUser);
 };

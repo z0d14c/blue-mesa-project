@@ -178,4 +178,18 @@ angular.module('mean.users')
           });
       };
     }
-  ]);
+  ])
+    .controller('CreateController', ['$scope', '$rootScope', '$http', '$location', '$stateParams', 'Global',
+        function($scope, $rootScope, $http, $location, $stateParams, Global) {
+            $scope.submit = function submit(){
+                $http.post('/users/chooseclass', {
+                    class: $scope.chosenClass
+                })
+                    .success(function(response) {
+                        console.log(response);
+                    })
+                    .error(function(error) {
+                        console.log(error);
+                    });
+            }
+        }]);
