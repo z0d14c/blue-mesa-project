@@ -11,7 +11,8 @@ angular.module('mean.battle')
     };
       $scope.battleMode = false;
       $scope.choiceMode = true;
-
+      $scope.difficulty = 'easy';
+      
     $scope.chooseDifficulty = function chooseDifficulty (choice){
       if(choice == 'easy') {
           $scope.problemScope = MathProblemGenerator.MathProblemGenerate(1);
