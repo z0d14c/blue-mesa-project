@@ -89,7 +89,8 @@ var UserSchema = new Schema({
     twitter: {},
     github: {},
     google: {},
-    linkedin: {}
+    linkedin: {},
+    problems: [{ type: Schema.Types.ObjectId, ref: 'Problem' }]
 });
 
 /**

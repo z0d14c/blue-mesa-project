@@ -1,5 +1,7 @@
 'use strict';
 
+var problems = require('../controllers/problems');
+
 // The Package is past automatically as first parameter
 module.exports = function(Battle, app, auth, database) {
 
@@ -23,4 +25,6 @@ module.exports = function(Battle, app, auth, database) {
       res.send(html);
     });
   });
+
+  app.get('/problems/generate/:type', problems.generate);
 };
