@@ -26,5 +26,8 @@ module.exports = function(Battle, app, auth, database) {
     });
   });
 
+  // TODO: Make sure these have auth code
   app.get('/problems/generate/:type', problems.generate);
+
+  app.post('/problems/attempt', problems.attempt)
 };

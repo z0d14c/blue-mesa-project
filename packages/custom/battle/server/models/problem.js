@@ -44,7 +44,7 @@ var ProblemSchema = new Schema({
  */
 ProblemSchema.methods = {
   isCorrect: function(query) {
-    return query === this.answer;
+    return query.toString() === this.answer;
   },
 
   isAnswered: function() {
@@ -54,6 +54,21 @@ ProblemSchema.methods = {
   // A function to select parts of the model to display
   toJSON: function() {
     return { type: this.type, question: this.question, id: this._id.valueOf() };
+  },
+
+  attempt: function(answer, callback) {
+    if(this.isCorrect(answer)) {
+      this.status = questionStatus.indexOf('answered');
+      this.save(function(err) {
+        if(err) {
+          callback(err, false);
+        } else {
+          callback(null, true);
+        }
+      })
+    } else {
+      callback(null, false);
+    }
   }
 };
 
