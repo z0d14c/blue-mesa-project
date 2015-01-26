@@ -20,7 +20,7 @@ exports.generate = function(req, res) {
 
     dbProblem.save(function(err) {
       if (err) {
-        res.status(500).json(dbProblem);
+        res.status(500).json(dbProblem.toJSON());
         return;
       }
       res.json(dbProblem.toJSON());
