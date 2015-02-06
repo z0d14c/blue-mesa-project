@@ -28,8 +28,8 @@ function makeEasyProblem() {
   var problem = {};
   var verbs = randomVerbMapping();
 
-  var one = -20 + Math.floor((Math.random() * 39) + 1);
-  var two = -20 + Math.floor((Math.random() * 39) + 1);
+  var one = Math.floor((Math.random() * 39) + 1);
+  var two = Math.floor((Math.random() * one) + 1);
 
   switch(verbs[1]) {
     case '-':
