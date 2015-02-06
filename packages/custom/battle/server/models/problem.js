@@ -65,7 +65,7 @@ ProblemSchema.methods = {
         } else {
           callback(null, true);
         }
-      })
+      });
     } else {
       callback(null, false);
     }
