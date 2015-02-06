@@ -23,6 +23,13 @@ Battle.register(function(app, auth, database) {
     roles: ['authenticated'],
     menu: 'main'
   });
+
+  Battle.menus.add({
+    title: 'Problem',
+    link: 'problem',
+    roles: ['authenticated'],
+    menu: 'main'
+  });
   
   Battle.aggregateAsset('css', 'battle.css');
     Battle.aggregateAsset('css', 'battle.css');
