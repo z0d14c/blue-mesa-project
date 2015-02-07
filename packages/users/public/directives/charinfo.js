@@ -9,10 +9,12 @@ angular.module('mean.users').directive('userStats',
       },
       controller: function ($scope, Global) {
         $scope.global = Global;
+        console.log($scope.global.user);
       },
-      template: "<div class='healthcontainer'>" +
-          "<div>TEST</div>" +
-          "<div></div>" +
+      template: "<div style='border:double; border-color: green;' class='healthcontainer'>" +
+          "<div>{{global.user.name}} \n</div>" +
+          "<div>{{global.user.currentHealth}} / {{global.user.maxHealth}}</div>" +
+          "<div>experience here</div>" +
       "</div>"
     };
   }
