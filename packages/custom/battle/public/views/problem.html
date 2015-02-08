@@ -1,17 +1,18 @@
 <section class="" data-ng-controller="Problem">
   <h1>Problems</h1>
   <div>
-    <div ng-show="battleMode">
-      <form id="battleForm">
+    <p>
+      <b>Question:</b> {{problem.question}}</br>
+    </p>
+      <!-- <form id="battleForm">
           <img ng-src="/battle/assets/img/{{difficulty}}.png" width="200" height="200">
 
           <p>{{problemScope.problemText}}</p>
           <input type="text" ng-model="userInput" style="width:200px;">
           <button ng-click="answer()">Answer!</button>
-      </form>
-    </div>
+      </form> -->
 
-    <div ng-show="choiceMode">
+<!--     <div ng-show="choiceMode">
       <form id="difficultyForm">
           <p>Which path do you choose, adventurer?</p>
           <button ng-click="chooseDifficulty('easy')">
@@ -21,7 +22,7 @@
           <button ng-click="chooseDifficulty('hard')">
               <span style="color: darkred;">Hard</span></button>
       </form>
-    </div>
+    </div> -->
   </div>
   <!--<button ng-click="newQuestion()">New Question!</button>-->
 
