@@ -3,10 +3,13 @@
 var mongoose = require('mongoose'),
     Problem = mongoose.model('Problem'),
     // async = require('async'),
-    mathGenerator = require('../generators/math_generator.js');
+    mathGenerator = require('../generators/math_generator.js'),
+    wordMathGenerator = require('../generators/word_math_generator.js');
+
 
 var registeredGenerators = {
-  'math': mathGenerator
+  'math': mathGenerator,
+  'word_math': wordMathGenerator
 };
 
 // '/problems/generate/:type'
