@@ -67,6 +67,16 @@ var UserSchema = new Schema({
         type: String,
         default: 'local'
     },
+    maxHealth: {
+      type: Number,
+        required: true,
+        default: 100
+    },
+    currentHealth: {
+        type: Number,
+        required: true,
+        default: 100
+    },
     avatar: String,
     class: String,
     location: String,
@@ -159,6 +169,10 @@ UserSchema.methods = {
      */
     makeSalt: function () {
         return crypto.randomBytes(16).toString('base64');
+    },
+
+    battleEnd: function () {
+        return this.currentHealth = this.maxHealth;
     },
 
     /**
