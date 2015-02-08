@@ -8,10 +8,30 @@ angular.module('mean.battle')
       $scope.problem = {
         question: 'temp'
       };
-      $scope.user = Global.user
 
-      apiFetch.fetchProblem('easy', 'math', function(p) {
-        $scope.problem = p;
-      });
+      $scope.fetchProblem = function() {
+        $scope.user_attempt = "";
+        apiFetch.fetchProblem('easy', 'math', function(p) {
+          $scope.problem = p;
+        });
+      };
+
+      $scope.attempt = function() {
+        var attempt = $scope.user_attempt;
+
+        apiFetch.submitAttempt($scope.problem.id, attempt, function(result) {
+          console.log(result)
+          if(result.result) {
+            $scope.answer = "Correct!";
+            // display a next question button here
+            $scope.display_next_answer = true;
+          } else {
+            $scope.answer = "Incorrect. Please try again.";
+          }
+          $scope.attempted = true; // I feel like this should be in a state machine
+        });
+      };
+
+      $scope.fetchProblem();
     }
 ]);
