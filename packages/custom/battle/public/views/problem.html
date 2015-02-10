@@ -1,36 +1,35 @@
-<section class="" data-ng-controller="Problem">
+<section data-ng-controller="Problem">
   <h1>Problems</h1>
-  <div>
+  <div class="" ng-show="state['start']"> 
+    <div class='well'>
+      <h2>Choose your difficulty</h2>
+      <button ng-click="chooseDifficulty('easy')">
+        <span style="color: darkgreen; ">Easy</span>
+      </button>
+      <button ng-click="chooseDifficulty('medium')">
+        <span style="color: coral;">Medium</span>
+      </button>
+      <button ng-click="chooseDifficulty('hard')">
+                <span style="color: darkred;">Hard</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="well" ng-show="state['battle']">
+    <h3>You are battling a {{difficulty}} monster!</h3>
     <p>
       <b>ID: </b>{{problem.id}}</br>
       <b>Question: </b> {{problem.question}}</br>
     </p>
-      <form id="battleForm">
-<!--           <img ng-src="/battle/assets/img/{{difficulty}}.png" width="200" height="200"> -->
-          <!-- <p>{{problemScope.problemText}}</p> -->
-          <input type="text" ng-model="user_attempt" style="width:200px;">
-          <button ng-click="attempt()" class="btn btn-primary">Submit</button>
-      </form>
-
-      <div ng-show="attempted">
-        {{answer}}
-      </div>
-      <div ng-show="display_next_answer">
-        <button ng-click="fetchProblem()" class="btn btn-info">Next Problem</button>
-      </div>
-<!--     <div ng-show="choiceMode">
-      <form id="difficultyForm">
-          <p>Which path do you choose, adventurer?</p>
-          <button ng-click="chooseDifficulty('easy')">
-              <span style="color: darkgreen; ">Easy</span></button>
-          <button ng-click="chooseDifficulty('medium')">
-              <span style="color: coral;">Medium</span></button>
-          <button ng-click="chooseDifficulty('hard')">
-              <span style="color: darkred;">Hard</span></button>
-      </form>
-    </div> -->
+    <form id="battleForm">
+      <input type="text" ng-model="user_attempt" style="width:200px;">
+      <button ng-click="attempt()" class="btn btn-primary">Submit</button>
+    </form>
   </div>
-  <!--<button ng-click="newQuestion()">New Question!</button>-->
-
+  <div ng-show="state['success'] || state['failure']">
+      {{result}}
+    </div>
+    <div ng-show="state['success']">
+      <button ng-click="nextProblem()" class="btn btn-info">Next Problem</button>
+  </div>
 </section>
-
