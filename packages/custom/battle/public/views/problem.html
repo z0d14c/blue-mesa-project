@@ -42,4 +42,17 @@
     <div ng-show="state['success']">
       <button ng-click="nextProblem()" class="btn btn-info">Next Problem</button>
   </div>
+
+  <div>
+    <table class='table table-bordered'>
+      <thead>
+        <th>Activity Log</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="value in activityLog">
+          <td>{{value}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>

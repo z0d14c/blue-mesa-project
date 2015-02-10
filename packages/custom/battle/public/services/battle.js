@@ -39,5 +39,8 @@ angular.module('mean.battle').factory('Battle', [
         this.submitAttempt = function(id, attempt, callback) {
             self.apiPost('/problems/attempt', { id: id, answer: attempt}, callback);
         };
+    }]).
+    service('rng', [function() {
+        
     }]
 );
