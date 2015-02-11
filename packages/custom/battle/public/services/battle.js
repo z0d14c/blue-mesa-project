@@ -32,7 +32,6 @@ angular.module('mean.battle').factory('Battle', [
             });
         };
 
-        // ML TODO: refactor this to make it more generic
         this.fetchProblem = function(difficulty, type, callback) {
             self.apiGet('/problems/generate/' + type, callback);
         };
@@ -41,6 +40,19 @@ angular.module('mean.battle').factory('Battle', [
         };
     }]).
     service('rng', [function() {
-        
+        // random function helpers
+        this.rollDice = function(requiredThreshold) {
+            return Math.random() * 100 >= requiredThreshold;
+        };
+    }])
+    .service('stateMachine', [function() {
+        this.switchState = function(dict, state) {
+            var keys = Object.keys(dict);
+            for(var i = 0; i < keys.length; i+=1) {
+                dict[keys[i]] = false; // make them all false
+            }
+
+            dict[state] = true; // switch states
+        };
     }]
 );
