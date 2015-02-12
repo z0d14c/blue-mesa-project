@@ -24,6 +24,9 @@
           <b>ID: </b>{{problem.id}}</br>
           <b>Question: </b> {{problem.question}}</br>
         </p>
+        <p class='lead'>
+          <b>Your Health: </b> {{player.currentHealth}}
+        </p>
         <div class='input-group' id="battleForm">
           <input class='form-control' type="text" ng-model="user_attempt">
           <span class='input-group-btn'>
@@ -34,16 +37,35 @@
 
       <div class='col-md-4 col-md-offset-4'>
         <img ng-src="/battle/assets/img/{{difficulty}}.png" width="200" height="200">
+        <p class='lead'>
+          <b>Monster's Health: </b>{{monster.health}}
+        </p>
       </div>
       <!-- Display some health bar here -->
     </div>
+    <div ng-show="battleState['postAnswer']">
+      <button ng-click="powerAttack('critical')" class='btn btn-lg btn-danger'>Hit him critically and he hits you</button>
+      <button ng-click="powerAttack('miss')" class='btn btn-lg btn-warning'>Hit him normally and he misses you</button>
+    </div>
   </div>
-  <div ng-show="battleState['postAction']">
-    <button ng-click="powerAttack('critical')">Hit him critically and he hits you</button>
-    <button ng-click="powerAttack('miss')">Hit him normally and he misses you</button>
-    <!-- <div ng-show="state['success']">
-      <button ng-click="nextProblem()" class="btn btn-info">Next Problem</button>
-    </div> -->
+
+  <div class='well' ng-show="state['success']">
+    <p class='lead'>
+      Congratulations! You won and gained {{monster.xp}} experience!
+      
+    </p>
+    <p>
+      <button ng-click='restart()' class='btn btn-lg btn-info'>Try again.</button>
+    </p>
+  </div>
+
+  <div class='well' ng-show="state['failure']">
+    <p class='lead'>
+      You lost.
+    </p>
+    <p>
+      <button ng-click='restart()' class='btn btn-lg btn-info'>Try again.</button>
+    </p>
   </div>
 
   <div>
@@ -52,7 +74,7 @@
         <th>Activity Log</th>
       </thead>
       <tbody>
-        <tr ng-repeat="value in activityLog"> <!-- Crappy activity log so we know what happens -->
+        <tr ng-repeat="value in activityLog track by $index"> <!-- Crappy activity log so we know what happens -->
           <td>{{value}}</td>
         </tr>
       </tbody>
