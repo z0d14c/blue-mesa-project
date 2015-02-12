@@ -27,9 +27,9 @@ angular.module('mean.battle')
     }
   ]).controller('Battle', ['$scope', '$rootScope', 'apiFetch', 'rng', 'Global', 'stateMachine', 
     function($scope, $rootScope, apiFetch, rng, Global, stateMachine) {
-      $scope.battle_user = {
+      $scope.player = {
         currentHealth: Global.user.maxHealth, // set at max for now
-        power: 0 // I'm not sure what the spec is for power at the moment
+        power: 40 // I'm not sure what the spec is for power at the moment
       };
 
       $scope.problem = {
@@ -53,20 +53,24 @@ angular.module('mean.battle')
         'hard': 75
       };
 
-      $scope.startBattle = function(diff) {
+      $scope.startBattle = function() {
         // Also determin power here too. 
         // ML TODO: Make a service for generating a monster and so it can keep track of it's health
-        switch(diff) {
+        switch($scope.difficulty) {
           case 'easy':
             $scope.monster.health = 100;
+            $scope.monster.power = 10;
             break;
           case 'medium':
             $scope.monster.health = 200;
+            $scope.monster.power = 20;
             break;
           case 'hard':
             $scope.monster.health = 300;
+            $scope.monster.power = 30;
             break;
         }
+        console.log("test")
       };
 
       $scope.afterTurn = function(questionResult) {
@@ -86,6 +90,15 @@ angular.module('mean.battle')
           }
         } else {
           $scope.enemyAttack();
+        }
+
+        if($scope.isSomeoneDead()) {
+          // we finished, figure out who died
+          if($scope.player.currentHealth <= 0) {
+            stateMachine.switchState($scope.state, 'failure');
+          } else { // monster is dead
+            stateMachine.switchState($scope.state, 'success');
+          }
         }
       };
 
@@ -122,12 +135,21 @@ angular.module('mean.battle')
 
       $scope.enemyAttack = function() {
         // Enemy does damage
+
+        // just basic health minus power
+        $scope.player.currentHealth -= $scope.monster.power;
       };
 
-      $scope.playerAttack = function(damage) {
+      $scope.playerAttack = function(factor) {
         // Player does damage
-        damage = typeof(damage) === undefined ? damage : 1.0; // attempt at default parameters
+        factor = typeof(factor) === undefined ? factor : 1.0; // attempt at default parameters
+
+        $scope.monster.health -= $scope.player.power * factor;
       };
+
+      $scope.isSomeoneDead = function() {
+        return $scope.monster.health <= 0 || $scope.player.currentHealth <= 0;
+      }
 
       $scope.rollPlayerAction = function() {
         if(rng.rollDice($scope.difficultyChances[$scope.difficulty])) {
@@ -148,7 +170,6 @@ angular.module('mean.battle')
         } else { // choice === 'miss'
           $scope.playerAttack();
         }
-        // stateMachine.switchState($scope)
       };
     }
   ]

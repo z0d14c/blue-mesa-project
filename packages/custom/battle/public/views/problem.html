@@ -19,6 +19,7 @@
     <div class='row'>
       <div class='col-md-4'>
         <h3>You are battling a {{difficulty}} monster!</h3>
+        <!-- Health bar here -->
         <p>
           <b>ID: </b>{{problem.id}}</br>
           <b>Question: </b> {{problem.question}}</br>
@@ -34,13 +35,15 @@
       <div class='col-md-4 col-md-offset-4'>
         <img ng-src="/battle/assets/img/{{difficulty}}.png" width="200" height="200">
       </div>
+      <!-- Display some health bar here -->
     </div>
   </div>
-  <div ng-show="state['success'] || state['failure']">
-      {{result}}
-    </div>
-    <div ng-show="state['success']">
+  <div ng-show="battleState['postAction']">
+    <button ng-click="powerAttack('critical')">Hit him critically and he hits you</button>
+    <button ng-click="powerAttack('miss')">Hit him normally and he misses you</button>
+    <!-- <div ng-show="state['success']">
       <button ng-click="nextProblem()" class="btn btn-info">Next Problem</button>
+    </div> -->
   </div>
 
   <div>
@@ -49,7 +52,7 @@
         <th>Activity Log</th>
       </thead>
       <tbody>
-        <tr ng-repeat="value in activityLog">
+        <tr ng-repeat="value in activityLog"> <!-- Crappy activity log so we know what happens -->
           <td>{{value}}</td>
         </tr>
       </tbody>
