@@ -1,1 +1,1 @@
-git push heroku HEAD:master
+git push staging HEAD:master
