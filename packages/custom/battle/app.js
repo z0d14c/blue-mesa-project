@@ -17,9 +17,16 @@ Battle.register(function(app, auth, database) {
   Battle.routes(app, auth, database);
 
   //We are adding a link to the main menu for all authenticated users
+  // Battle.menus.add({
+  //   title: 'battle example page',
+  //   link: 'battle example page',
+  //   roles: ['authenticated'],
+  //   menu: 'main'
+  // });
+
   Battle.menus.add({
-    title: 'battle example page',
-    link: 'battle example page',
+    title: 'Battle',
+    link: 'problem',
     roles: ['authenticated'],
     menu: 'main'
   });

@@ -35,8 +35,8 @@ exports.generate = function(req, res) {
 };
 
 exports.attempt = function(req, res) {
-  var id = req.body.id
-  var answer = req.body.answer
+  var id = req.body.id;
+  var answer = req.body.answer;
 
   Problem.findById(id, function(err, problem) {
     if(err) {

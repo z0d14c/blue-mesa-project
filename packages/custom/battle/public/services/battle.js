@@ -7,45 +7,52 @@ angular.module('mean.battle').factory('Battle', [
             };
         }
     ])
-    .service('MathProblemGenerator', [ function () {
+    .service('apiFetch', ['$http', function($http) {
+        var self = this; // I dislike this 'practice'
 
-        this.MathProblemGenerate = function MathProblemGenerate(num) {
-            var self = this;
-            self.problemScope = {};
-            var operatorsAvailable = ['+', '-'];
-            var numbers = [];
-            var operators = [];
-            self.problemScope.correctAnswer = 0;
-            self.problemScope.problemText = '';
-            numbers[0] = -20 + Math.floor((Math.random() * 39) + 1);
-            numbers[1] = -20 + Math.floor((Math.random() * 39) + 1);
+        this.apiPost = function(url, data, callback) {
+            $http.post(url, data).
+            success(function(data, status) {
+                callback(data);
+            }).
+            error(function(data, status) {
+                console.log('ERROR: ' + data);
+                console.log('STATUS: ' + status);
+            });
+        };
 
-            operators[0] = operatorsAvailable[Math.floor((Math.random() * 2) + 1)];
+        this.apiGet = function(url, callback) {
+            $http.get(url).
+            success(function(data, status) {
+                callback(data);
+            }).
+            error(function(data, status) {
+                console.log('ERROR: ' + data);
+                console.log('STATUS: ' + status);
+            });
+        };
 
-            if (num == 2) {
-                operators[1] = operatorsAvailable[Math.floor((Math.random() * 2) + 1)];
-                numbers[2] = -20 + Math.floor((Math.random() * 39) + 1);
+        this.fetchProblem = function(difficulty, type, callback) {
+            self.apiGet('/problems/generate/' + type, callback);
+        };
+        this.submitAttempt = function(id, attempt, callback) {
+            self.apiPost('/problems/attempt', { id: id, answer: attempt}, callback);
+        };
+    }]).
+    service('rng', [function() {
+        // random function helpers
+        this.rollDice = function(requiredThreshold) {
+            return Math.random() * 100 >= requiredThreshold;
+        };
+    }])
+    .service('stateMachine', [function() {
+        this.switchState = function(dict, state) {
+            var keys = Object.keys(dict);
+            for(var i = 0; i < keys.length; i+=1) {
+                dict[keys[i]] = false; // make them all false
             }
 
-            angular.forEach(numbers, function (numVal, numIdx) {
-                if (numIdx == 0) {
-                    self.problemScope.correctAnswer = (numVal);
-                    self.problemScope.problemText += (numVal);
-                } else {
-                    if (operators[numIdx - 1] === '-') {
-                        self.problemScope.correctAnswer += -numVal;
-                        self.problemScope.problemText += ' ' + operators[numIdx - 1] + ' ' + '(' + numVal + ')';
-                    } else if (operators[numIdx - 1] === '+') {
-                        self.problemScope.correctAnswer += numVal;
-                        self.problemScope.problemText +=  ' ' +  operators[numIdx - 1] + ' ' + numVal;
-                    }
-                }
-            });
-            console.log('numbers are');
-            console.log(numbers);
-            console.log('operators are');
-            console.log(operators);
-            self.problemScope.problemText += " = ?";
-            return this.problemScope;
-        }
-    }]);
+            dict[state] = true; // switch states
+        };
+    }]
+);
