@@ -25,7 +25,7 @@ Battle.register(function(app, auth, database) {
   // });
 
   Battle.menus.add({
-    title: 'Problem',
+    title: 'Battle',
     link: 'problem',
     roles: ['authenticated'],
     menu: 'main'
